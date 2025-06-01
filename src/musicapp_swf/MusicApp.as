@@ -29,6 +29,7 @@ package
             CurrentTheme = classes["api.CurrentTheme"];
             Audio = new classes["api.Audio"] as Object;
             Log = classes["com.uconnext.Log"];
+            Log.log("MusicApp initialized", pkgName);
         }
 
         private function onAddedToStage(event:Event):void
@@ -54,7 +55,6 @@ package
             musicUI = new UI(CurrentTheme, Audio, stageWidth, stageHeight);
             addChild(CurrentTheme.ui_Background(stageWidth, stageHeight) as Sprite);
             addChild(musicUI);
-            Log.log("MusicApp initialized", pkgName);
         }
     }
 }

@@ -61,6 +61,16 @@ package com.uconnext.ui
             thumb.addEventListener(MouseEvent.MOUSE_DOWN, onThumbMouseDown);
         }
 
+        public function get max():Number
+        {
+            return maxValue;
+        }
+
+        public function get min():Number
+        {
+            return minValue;
+        }
+
         private function onThumbMouseDown(event:MouseEvent):void
         {
             if (this.stage) // Sprawdzenie, czy stage jest dostępny
@@ -115,7 +125,7 @@ package com.uconnext.ui
             updateThumbPosition();
         }
 
-        public function getValue():Number
+        public function get value():Number
         {
             return currentValue;
         }

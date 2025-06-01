@@ -58,7 +58,7 @@ package com.uconnext.api.v1
 
         // AudioManager
 
-        public function setSource(source:String):void
+        public function set currentSource(source:String):void
         {
             try {
                 Log.log("setSource: " + source, "api.Audio");
@@ -109,6 +109,28 @@ package com.uconnext.api.v1
             } catch (error:Error) {
                 Log.log("Error in get sources: " + error.message, "api.Audio");
                 return [];
+            }
+        }
+
+        public function isSourceMediaService(source:String):Boolean
+        {
+            try {
+                Log.log("isSourceMediaService: " + source, "api.Audio");
+                return audioManager.isSourceMediaService(source);
+            } catch (error:Error) {
+                Log.log("Error in isSourceMediaService: " + error.message, "api.Audio");
+                return false;
+            }
+        }
+
+        public function isSourceAvailable(source:String):Boolean
+        {
+            try {
+                Log.log("isSourceAvailable: " + source, "api.Audio");
+                return audioManager.isSourceAvailable(source);
+            } catch (error:Error) {
+                Log.log("Error in isSourceAvailable: " + error.message, "api.Audio");
+                return false;
             }
         }
 
