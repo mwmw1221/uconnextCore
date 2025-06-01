@@ -1,0 +1,14 @@
+<themes>
+    <theme>
+        <name>Default/001_Uconnect</name>
+        <backgroundColor>#000033</backgroundColor>
+        <textColor>0xFFFFFF</textColor>
+        <accentColor>0x0000FF</accentColor>
+        <accentTextColor>#FFFFFF</accentTextColor>
+        <containerColor>0x000033</containerColor>
+        <containerTextColor>0xFFFFFF</containerTextColor>
+        <roundRadius>10</roundRadius>
+        <bgGradient1>#4444DD</bgGradient1>
+        <bgGradient2>#000000</bgGradient2>
+    </theme>
+</themes>

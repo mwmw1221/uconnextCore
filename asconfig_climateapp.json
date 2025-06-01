@@ -1,0 +1,16 @@
+{
+	"config": "air",
+	"compilerOptions": {
+		"source-path": [
+			"src/climateapp_swf",
+			"src/main_swf"
+		],
+		"library-path": [
+			"libs"
+		],
+		"output": "bin/pkgs/climate.swf"
+	},
+	"application": "src/climateapp_swf/climateapp-app.xml",
+	"mainClass": "ClimateApp",
+	"copySourcePathAssets": true
+}

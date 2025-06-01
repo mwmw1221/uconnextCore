@@ -1,0 +1,36 @@
+Date : 2025-05-06 16:13:23
+Directory : /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext
+Total : 9 files,  1309 codes, 35 comments, 209 blanks, all 1553 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| ActionScript |          9 |      1,309 |         35 |        209 |      1,553 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                            |          9 |      1,309 |         35 |        209 |      1,553 |
+| . (Files)                                                                                                    |          6 |        721 |         10 |         62 |        793 |
+| api                                                                                                          |          3 |        588 |         25 |        147 |        760 |
+| api/v1                                                                                                       |          3 |        588 |         25 |        147 |        760 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                                     | language     | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/Core.as              | ActionScript |        384 |          5 |         44 |        433 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/DeviceConfig.as      | ActionScript |         14 |          0 |          4 |         18 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/Log.as               | ActionScript |         44 |          4 |          9 |         57 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/PeripheralLoader.as  | ActionScript |         34 |          1 |          1 |         36 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/SpeedLockout.as      | ActionScript |        238 |          0 |          4 |        242 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/SystemUIEvent.as     | ActionScript |          7 |          0 |          0 |          7 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/Audio.as      | ActionScript |        497 |         11 |        112 |        620 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/GlobalVars.as | ActionScript |         22 |          5 |         21 |         48 |
+| /home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/Vehicle.as    | ActionScript |         69 |          9 |         14 |         92 |
+| Total                                                                                                        |              |      1,309 |         35 |        209 |      1,553 |
++--------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+

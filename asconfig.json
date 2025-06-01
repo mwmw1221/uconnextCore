@@ -1,0 +1,15 @@
+{
+	"config": "air",
+	"compilerOptions": {
+		"source-path": [
+			"src/main_swf"
+		],
+		"library-path": [
+			"libs"
+		],
+		"output": "bin/main.swf"
+	},
+	"application": "src/main_swf/uConnext-app.xml",
+	"mainClass": "uConnext",
+	"copySourcePathAssets": true
+}

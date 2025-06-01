@@ -1,0 +1,68 @@
+<packages>
+    <pkg>
+        <name>com.uconnext.systemui</name>
+        <version>0.1</version>
+        <friendlyname>System UI</friendlyname>
+        <icon>null</icon>
+        <file>systemui.swf</file>
+        <description>Main GUI for uConnext.</description>
+        <isSystem>true</isSystem>
+        <isVivibleInLauncher>false</isVivibleInLauncher>
+        <classDependencies>
+            <dependency>com.uconnext.Core</dependency>
+            <dependency>api.CurrentTheme</dependency>
+        </classDependencies>
+        <defaultAppBindings></defaultAppBindings>
+    </pkg>
+
+    <pkg>
+        <name>com.uconnext.music</name>
+        <version>1</version>
+        <friendlyname>Media</friendlyname>
+        <icon>musicIcon.png</icon>
+        <file>music.swf</file>
+        <description>uConnext media player.</description>
+        <isSystem>true</isSystem>
+        <isVivibleInLauncher>true</isVivibleInLauncher>
+        <classDependencies>
+            <dependency>com.uconnext.Core</dependency>
+            <dependency>api.CurrentTheme</dependency>
+            <dependency>api.Audio</dependency>
+        </classDependencies>
+        <defaultAppBindings>
+            <bind>media</bind>
+        </defaultAppBindings>
+    </pkg>
+
+    <pkg>
+        <name>com.uconnext.climate</name>
+        <version>1</version>
+        <friendlyname>Comfort</friendlyname>
+        <icon>climateIcon.png</icon>
+        <file>climate.swf</file>
+        <description>uConnext app for climate control and comfort.</description>
+        <isSystem>true</isSystem>
+        <isVivibleInLauncher>true</isVivibleInLauncher>
+        <classDependencies>
+            <dependency>com.uconnext.Core</dependency>
+        </classDependencies>
+        <defaultAppBindings>
+            <bind>climate</bind>
+        </defaultAppBindings>
+    </pkg>
+
+    <pkg>
+        <name>com.example.testapp</name>
+        <version>1</version>
+        <friendlyname>Test App</friendlyname>
+        <icon>testapp.png</icon>
+        <file>testapp.swf</file>
+        <description>Test application for uConnext.</description>
+        <isSystem>false</isSystem>
+        <isVivibleInLauncher>true</isVivibleInLauncher>
+        <classDependencies>
+            <dependency>api.CurrentTheme</dependency>
+        </classDependencies>
+        <defaultAppBindings></defaultAppBindings>
+    </pkg>
+</packages>

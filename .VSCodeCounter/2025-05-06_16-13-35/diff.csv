@@ -1,0 +1,15 @@
+"filename", "language", "XML", "ActionScript", "comment", "blank", "total"
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/Core.as", "ActionScript", 0, -384, -5, -44, -433
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/DeviceConfig.as", "ActionScript", 0, -14, 0, -4, -18
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/Log.as", "ActionScript", 0, -44, -4, -9, -57
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/PeripheralLoader.as", "ActionScript", 0, -34, -1, -1, -36
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/SpeedLockout.as", "ActionScript", 0, -238, 0, -4, -242
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/SystemUIEvent.as", "ActionScript", 0, -7, 0, 0, -7
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/Audio.as", "ActionScript", 0, -497, -11, -112, -620
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/GlobalVars.as", "ActionScript", 0, -22, -5, -21, -48
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/main_swf/com/uconnext/api/v1/Vehicle.as", "ActionScript", 0, -69, -9, -14, -92
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/musicapp_swf/MusicApp.as", "ActionScript", 0, 247, 1, 50, 298
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/musicapp_swf/musicapp-app.xml", "XML", 10, 0, 340, 61, 411
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/musicapp_swf/ui/ImageToggleBtn.as", "ActionScript", 0, 51, 0, 10, 61
+"/home/michal-wyszynski/Desktop/u connect reverse eng/uConnext/src/musicapp_swf/ui/TriStateImgToggleBtn.as", "ActionScript", 0, 59, 0, 10, 69
+"Total", "-", 10, -952, 306, -78, -714
