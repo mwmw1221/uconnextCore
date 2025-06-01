@@ -1,6 +1,8 @@
 # **uConnext (WIP)**
 uConnext is a work-in-progress custom HMI for uConnect 3C devices on firmware 14.32.3.
 
+❕ | Testers needed
+
 ## Progress
 
  - [x] Base core
