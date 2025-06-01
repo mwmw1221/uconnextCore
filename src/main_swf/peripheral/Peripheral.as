@@ -173,8 +173,8 @@ package peripheral
          "synchronous":true,
          "postprocess":function():void
          {
-            Peripheral.tuner.setRegion(GlobalVars.region);
-            Peripheral.tuner.setMarket(GlobalVars.market);
+            tuner.setRegion(GlobalVars.region);
+            tuner.setMarket(GlobalVars.market);
          }
       },{
          "propertyName":"Camera",

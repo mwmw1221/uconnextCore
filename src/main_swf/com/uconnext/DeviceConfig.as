@@ -9,6 +9,7 @@ package com.uconnext
     {
         public function DeviceConfig() { }
 
+        // Removes the need for running Peripheral.as
         public static const EMULATOR:Boolean = true;
 
         public static const SW_VERSION:String = "0.1";
