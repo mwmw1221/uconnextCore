@@ -213,10 +213,10 @@ package peripheral
          "synchronous":true,
          "postprocess":function():void
          {
-            Peripheral.phonebook = Peripheral.bluetoothPhone.phoneBook;
-            Peripheral.phoneCallList = Peripheral.bluetoothPhone.callList;
-            Peripheral.phonebook.initBt(Peripheral.bluetooth);
-            Peripheral.phoneCallList.initBt(Peripheral.bluetooth);
+            phonebook = bluetoothPhone.phoneBook;
+            phoneCallList = bluetoothPhone.callList;
+            phonebook.initBt(bluetooth);
+            phoneCallList.initBt(bluetooth);
          }
       },{
          "propertyName":"cvpdemo",
@@ -240,7 +240,7 @@ package peripheral
          "synchronous":true,
          "preprocess":function():void
          {
-            Peripheral.presetPersistencyManager.init(Peripheral.tuner.region);
+            presetPersistencyManager.init(tuner.region);
          }
       },{
          "propertyName":"swc",
@@ -394,7 +394,7 @@ package peripheral
          "synchronous":true,
          "postprocess":function():void
          {
-            Peripheral.displayManager.requestDisplay("hmi",true);
+            displayManager.requestDisplay("hmi",true);
          }
       },{
          "propertyName":"dmbManager",

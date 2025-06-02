@@ -22,9 +22,9 @@ package com.nfuzion.moduleLink
       
       private var client:Client;
       
-      private var mInboxMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>([]);
+      private var mInboxMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>();
       
-      private var mInboxPageOneList:Vector.<SMSMessage> = new Vector.<SMSMessage>([]);
+      private var mInboxPageOneList:Vector.<SMSMessage> = new Vector.<SMSMessage>();
       
       private var mInboxMessageListLength:int = -1;
       
@@ -48,7 +48,7 @@ package com.nfuzion.moduleLink
       
       private var mRequestedMessage:SMSMessage;
       
-      private var mInboxIncomingMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>([]);
+      private var mInboxIncomingMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>();
       
       private var mIncomingMessageID:String;
       
@@ -72,7 +72,7 @@ package com.nfuzion.moduleLink
       
       private var mUnreadSMSCount:int = -1;
       
-      private var mInboxUnreadMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>([]);
+      private var mInboxUnreadMessageList:Vector.<SMSMessage> = new Vector.<SMSMessage>();
       
       private var mUnreadSMSCountPopup:int = -1;
       
