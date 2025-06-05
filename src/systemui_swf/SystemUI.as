@@ -59,161 +59,108 @@ package
 
         private function onAddedToStage(e:Event):void
         {
-            var topMenu:Sprite = CurrentTheme.ui_BackgroundCustom(stageWidth - 10, 30, uint(CurrentTheme.currentTheme.roundRadius), CurrentTheme.COLOR_CONTAINER);
-            topMenu.x = 5
-            topMenu.y = 5;
-            addChild(topMenu);
+            // taskbar gui v2.0
 
 
-            var topMenuText:TextField = CurrentTheme.ui_Text();
-            topMenuText.autoSize = TextFieldAutoSize.LEFT
-            topMenuText.x = 10
-            topMenuText.text = "00° | Not playing"
-            topMenuText.y = 11
-            addChild(topMenuText)
+            var taskbarBG:Shape = new Shape();
+            taskbarBG.graphics.beginFill(0x0, 1);
+            taskbarBG.graphics.drawRect(0, 0, stageWidth, 40);
+            taskbarBG.graphics.endFill();
+            taskbarBG.x = 0;
+            taskbarBG.y = stageHeight - 40;
+            addChild(taskbarBG);
 
-            var topMenuTextCenter:TextField = CurrentTheme.ui_Text();
-            topMenuTextCenter.text = "Mon 00:00 | N"
-            topMenuTextCenter.autoSize = TextFieldAutoSize.CENTER
-            topMenuTextCenter.x = 10 + topMenu.width / 2 - topMenuText.width / 2
-            topMenuTextCenter.y = 11
-            addChild(topMenuTextCenter)
+            var taskbarTempLeft:TextField = CurrentTheme.ui_Text();
+            taskbarTempLeft.text = "00°";
+            taskbarTempLeft.autoSize = TextFieldAutoSize.LEFT;
+            taskbarTempLeft.x = 10;
+            taskbarTempLeft.y = taskbarBG.y + taskbarBG.height / 2 - taskbarTempLeft.height / 2;
+            addChild(taskbarTempLeft);
 
-            var topMenuTextRight:TextField = CurrentTheme.ui_Text();
-            topMenuTextRight.text = "00° out.     00°";
-            topMenuTextRight.autoSize = TextFieldAutoSize.RIGHT
-            topMenuTextRight.x = topMenu.width - topMenuTextRight.width
-            topMenuTextRight.y = 11
-            addChild(topMenuTextRight)
+            var taskbarTempRight:TextField = CurrentTheme.ui_Text();
+            taskbarTempRight.text = "00°";
+            taskbarTempRight.autoSize = TextFieldAutoSize.RIGHT;
+            taskbarTempRight.x = stageWidth - 10 - taskbarTempRight.width;
+            taskbarTempRight.y = taskbarBG.y + taskbarBG.height / 2 - taskbarTempRight.height / 2;
+            addChild(taskbarTempRight);
 
+            var taskbarClockRight:TextField = CurrentTheme.ui_Text();
+            taskbarClockRight.text = "00:00";
+            taskbarClockRight.autoSize = TextFieldAutoSize.RIGHT;
+            taskbarClockRight.x = stageWidth - 10 - taskbarClockRight.width - taskbarTempRight.width - 10; // Przesunięcie o szerokość temperatury
+            taskbarClockRight.y = taskbarBG.y + taskbarBG.height / 2 - taskbarClockRight.height / 2;
+            addChild(taskbarClockRight);
 
+            var taskbarCompassLeft:TextField = CurrentTheme.ui_Text();
+            taskbarCompassLeft.text = "N";
+            taskbarCompassLeft.autoSize = TextFieldAutoSize.LEFT;
+            taskbarCompassLeft.x = taskbarTempLeft.x + taskbarTempLeft.width + 10; // Przesunięcie o szerokość temperatury
+            taskbarCompassLeft.y = taskbarBG.y + taskbarBG.height / 2 - taskbarCompassLeft.height / 2;
+            addChild(taskbarCompassLeft);
 
-            var taskbar:Sprite = CurrentTheme.ui_BackgroundCustom(stageWidth, 60, 0, CurrentTheme.COLOR_CONTAINER);
-            taskbar.x = 0;
-            taskbar.y = stageHeight - 60;
-            addChild(taskbar);
+            var taskbarIcons:Array = ["appsIcon", "musicIcon", "climateIcon", "phoneIcon"];
+            var iconSize:int = 20; // Rozmiar ikon
+            var iconPadding:int = 15; // Odstęp między ikonami
+            // ikony wyśrodkowane w taskbarze
+            var totalIconsWidth:int = (taskbarIcons.length * iconSize) + ((taskbarIcons.length - 1) * iconPadding);
+            var startX:int = (stageWidth - totalIconsWidth) / 2;
+            for (var i:int = 0; i < taskbarIcons.length; i++) {
+                var icon:Loader = new Loader();
+                icon.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
+                    var loader:Loader = Loader(e.target.loader);
+                    loader.width = iconSize;
+                    loader.height = iconSize;
+                    Log.log("Taskbar icon loaded: " + loader.name, pkgName);
+                });
+                icon.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
+                    Log.log("Failed to load taskbar icon: " + e.text, pkgName);
+                });
+                icon.load(new URLRequest("" + taskbarIcons[i] + ".png"));
+                icon.x = startX + (i * (iconSize + iconPadding));
+                icon.y = taskbarBG.y + taskbarBG.height / 2 - iconSize / 2;
+                icon.name = taskbarIcons[i];
+                icon.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
+                    Log.log("Taskbar icon clicked: " + e.target.name, pkgName);
+                    if (e.target.name == "appsIcon") {
+                        if (Core && "forceCloseActiveApp" in Core) {
+                            Core.forceCloseActiveApp();
+                            openAppDrawer();
+                            
+                        } else {
+                            Log.log("forceCloseActiveApp is not available in Core, aborting", pkgName);
+                            showPopup("Core error", "forceCloseActiveApp is not available in Core, aborting", "OK")
+                        }
+                    }
 
-            var totalIcons:int = 4; // Liczba ikon na dolnym pasku
-            var spacing:int = (stageWidth - (totalIcons * 60)) / (totalIcons + 1); // Odstęp między ikonami
-
-            var appsIcon:Loader = new Loader();
-            appsIcon.load(new URLRequest("appsIcon.png"));
-            appsIcon.x = spacing;
-            appsIcon.y = stageHeight - 55;
-            appsIcon.scaleX = 0.7;
-            appsIcon.scaleY = 0.7;
-            appsIcon.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-                Log.log("Apps icon loaded.", pkgName);
-            });
-            appsIcon.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
-                showPopup("SystemUI Load error", "Failed to load icon for item 'APPS'", "OK")
-            });
-            appsIcon.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
-                Log.log("Apps icon clicked.", pkgName);
-                if (Core && "forceCloseActiveApp" in Core) {
-                    Core.forceCloseActiveApp();
-                    openAppDrawer();
-                    
-                } else {
-                    Log.log("forceCloseActiveApp is not available in Core, aborting", pkgName);
-                    showPopup("Core error", "forceCloseActiveApp is not available in Core, aborting", "OK")
-                }
-            });
-            addChild(appsIcon);
-
-            var appsText:TextField = CurrentTheme.ui_Text();
-            appsText.text = "Apps";
-            appsText.autoSize = TextFieldAutoSize.CENTER;
-            var textOffset:int = 15; // Stała wartość przesunięcia tekstu
-            appsText.x = appsIcon.x + (appsIcon.width * appsIcon.scaleX - appsText.textWidth) / 2 + textOffset;
-            appsText.y = stageHeight - 7.5 - appsText.textHeight;
-            addChild(appsText);
-
-            var musicIcon:Loader = new Loader();
-            musicIcon.load(new URLRequest("musicIcon.png"))
-            musicIcon.x = appsIcon.x + 60 + spacing;
-            musicIcon.y = stageHeight - 55;
-            musicIcon.scaleX = 0.7;
-            musicIcon.scaleY = 0.7;
-            musicIcon.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-                Log.log("Music icon loaded.", pkgName);
-            });
-            musicIcon.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
-                showPopup("SystemUI Load error", "Failed to load icon for item 'MUSIC'", "OK")
-            });
-            musicIcon.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void{
-                Core.openAppForDefaultBinding("media")
-            })
-            addChild(musicIcon)
-
-            var musicText:TextField = CurrentTheme.ui_Text();
-            musicText.text = "Media";
-            musicText.autoSize = TextFieldAutoSize.CENTER;
-            musicText.x = musicIcon.x + (musicIcon.width * musicIcon.scaleX - musicText.textWidth) / 2 + textOffset;
-            musicText.y = stageHeight - 7.5 - musicText.textHeight;
-            addChild(musicText);
-
-            var climateIcon:Loader = new Loader();
-            climateIcon.load(new URLRequest("climateIcon.png"))
-            climateIcon.x = musicIcon.x + 60 + spacing;
-            climateIcon.y = stageHeight - 55;
-            climateIcon.scaleX = 0.7;
-            climateIcon.scaleY = 0.7;
-            climateIcon.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-                Log.log("Climate icon loaded.", pkgName);
-            });
-            climateIcon.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
-                showPopup("SystemUI Load error", "Failed to load icon for item 'CLIMATE'", "OK")
-            });
-            climateIcon.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void{
-                Core.openAppForDefaultBinding("climate")
-            })
-            addChild(climateIcon)
-
-            var climateText:TextField = CurrentTheme.ui_Text();
-            climateText.text = "Comfort";
-            climateText.autoSize = TextFieldAutoSize.CENTER;
-            climateText.x = climateIcon.x + (climateIcon.width * climateIcon.scaleX - climateText.textWidth) / 2 + textOffset;
-            climateText.y = stageHeight - 7.5 - climateText.textHeight;
-            addChild(climateText);
-
-            var phoneIcon:Loader = new Loader();
-            phoneIcon.load(new URLRequest("phoneIcon.png"))
-            phoneIcon.x = climateIcon.x + 60 + spacing;
-            phoneIcon.y = stageHeight - 55;
-            phoneIcon.scaleX = 0.7;
-            phoneIcon.scaleY = 0.7;
-            phoneIcon.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
-                Log.log("Phone icon loaded.", pkgName);
-            });
-            phoneIcon.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, function(e:IOErrorEvent):void {
-                showPopup("SystemUI Load error", "Failed to load icon for item 'PHONE'", "OK")
-            });
-            phoneIcon.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void{
-                Core.openAppForDefaultBinding("bluetooth")
-            })
-            addChild(phoneIcon)
-
-            var phoneText:TextField = CurrentTheme.ui_Text();
-            phoneText.text = "Phone";
-            phoneText.autoSize = TextFieldAutoSize.CENTER;
-            phoneText.x = phoneIcon.x + (phoneIcon.width * phoneIcon.scaleX - phoneText.textWidth) / 2 + textOffset;
-            phoneText.y = stageHeight - 7.5 - phoneText.textHeight;
-            addChild(phoneText);
+                    else if (e.target.name == "musicIcon") {
+                        Log.log("Opening MusicApp", pkgName);
+                        Core.openAppForDefaultBinding("media")
+                    }
+                    else if (e.target.name == "climateIcon") {
+                        Log.log("Opening ClimateApp", pkgName);
+                        Core.openAppForDefaultBinding("climate");
+                    }
+                    else if (e.target.name == "phoneIcon") {
+                        Log.log("Opening PhoneApp", pkgName);
+                        Core.openAppForDefaultBinding("phone");
+                    }
+                });
+                addChild(icon);
+            }
 
 
             appContainer = new Sprite();
             appContainer.x = 10;
-            appContainer.y = 40;
+            appContainer.y = 10;
             appContainer.graphics.beginFill(0x000000, 0);
-            appContainer.graphics.drawRoundRect(0, 0, stageWidth - 20, stageHeight - 110, 15);
+            appContainer.graphics.drawRoundRect(0, 0, stageWidth - 20, stageHeight - 60, 15);
             appContainer.graphics.endFill();
             addChild(appContainer);
 
             // Dodanie maski z zaokrąglonymi rogami
             var appContainerMask:Shape = new Shape();
             appContainerMask.graphics.beginFill(0x000000, 1);
-            appContainerMask.graphics.drawRoundRect(0, 0, stageWidth - 20, stageHeight - 110, 15);
+            appContainerMask.graphics.drawRoundRect(0, 0, stageWidth - 20, stageHeight - 60, 15);
             appContainerMask.graphics.endFill();
             appContainerMask.x = appContainer.x;
             appContainerMask.y = appContainer.y;

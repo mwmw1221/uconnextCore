@@ -30,7 +30,7 @@ package com.uconnext
     import com.uconnext.api.v1.CurrentTheme;
 
     public class Core extends EventDispatcher{
-        public static const VERSION:String = "0.1";
+        public static const VERSION:String = "0.2";
         public static const ALL_APPS_READY:String = "allAppsReady";
         public static const PERIPHERAL_READY:String = "peripheralReady";
         public static const VARS_READY:String = "varsReady";

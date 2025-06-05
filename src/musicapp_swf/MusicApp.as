@@ -34,14 +34,12 @@ package
 
         private function onAddedToStage(event:Event):void
         {
-            removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             initializeApp();
             Log.log("MusicApp added to stage", pkgName);
         }
 
         private function onRemovedFromStage(event:Event):void
         {
-            removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
             if (musicUI && contains(musicUI)) {
                 removeChild(musicUI);
                 musicUI = null;
