@@ -6,6 +6,9 @@ package com.uconnext.ui
 
     public class Button extends Sprite
     {
+        public var realW:Number
+        public var realH:Number
+
         public function Button()
         {
             super();
@@ -13,6 +16,9 @@ package com.uconnext.ui
 
         public function create(width:int, height:int, label:String):Button
         {
+            realH = height
+            realW = width
+
             var accentColor:uint = CurrentTheme.currentTheme.accentColor;
             var darkenedColor:uint = CurrentTheme.darkenColor(accentColor, 0.1);
             graphics.beginFill(darkenedColor, 0.8); // 80% opacity

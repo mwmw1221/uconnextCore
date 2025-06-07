@@ -41,14 +41,14 @@ package com.uconnext.ui
         {
             // Tworzenie toru slidera
             track = new Sprite();
-            track.graphics.beginFill(CurrentTheme.currentTheme.containerColor); // Kolor toru
+            track.graphics.beginFill(CurrentTheme.currentTheme.accentColor); // Kolor toru
             track.graphics.drawRoundRect(0, 0, w, 10, CurrentTheme.currentTheme.roundRadius); // Szerokość 200, wysokość 20
             track.graphics.endFill();
             addChild(track);
 
             // Tworzenie suwaka (thumb)
             thumb = new Sprite();
-            thumb.graphics.beginFill(CurrentTheme.currentTheme.accentColor); // Kolor suwaka
+            thumb.graphics.beginFill(CurrentTheme.currentTheme.accentTextColor); // Kolor suwaka
             thumb.graphics.drawCircle(0, 0, 10); // Promień suwaka 10
             thumb.graphics.endFill();
             thumb.x = 100; // Początkowa pozycja suwaka

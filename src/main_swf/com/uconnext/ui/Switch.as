@@ -16,7 +16,7 @@ package com.uconnext.ui
         public function create(width:int, height:int):Switch
         {
             graphics.clear();
-            var accentColor:uint = isOn ? CurrentTheme.currentTheme.accentColor : CurrentTheme.currentTheme.containerColor;
+            var accentColor:uint = isOn ? CurrentTheme.currentTheme.accentTextColor : CurrentTheme.currentTheme.accentColor;
             var darkenedColor:uint = accentColor
             graphics.beginFill(darkenedColor, 0.6); // 60% opacity
             graphics.drawRoundRect(0, 0, width, height, int(CurrentTheme.currentTheme.roundRadius));

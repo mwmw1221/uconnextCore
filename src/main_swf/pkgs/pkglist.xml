@@ -28,6 +28,7 @@
             <dependency>com.uconnext.Core</dependency>
             <dependency>api.CurrentTheme</dependency>
             <dependency>api.Audio</dependency>
+            <dependency>api.GlobalVars</dependency>
         </classDependencies>
         <defaultAppBindings>
             <bind>media</bind>

@@ -98,7 +98,7 @@ package
 			versionText.textColor = 0xFFFFFF;
 			versionText.text = "uConnext core v" + Core.VERSION + "\nAPI v" + DeviceConfig.API_VERSION + "\nLog path: " + Log.logPath;
 			versionText.x = 10;
-			versionText.y = 320;
+			versionText.y = stage.stageHeight - 40 - versionText.textHeight;
 			versionText.autoSize = TextFieldAutoSize.LEFT;
 			addChild(versionText);
 
@@ -192,7 +192,7 @@ package
 		}
 
 		private function onAppsReady(e:Event):void{
-			core.openApp("com.example.testapp")
+			core.openAppForDefaultBinding("media")
 			removeChild(launchLog);
 			removeChild(launchBg);
 		}

@@ -13,6 +13,9 @@ package
     import flash.events.IOErrorEvent;
     import flash.events.MouseEvent;
     import flash.filters.BlurFilter;
+    import flash.display.DisplayObject;
+    import flash.utils.Timer;
+    import flash.events.TimerEvent;
 
 	public class SystemUI extends Sprite
 	{
@@ -70,28 +73,32 @@ package
             taskbarBG.y = stageHeight - 40;
             addChild(taskbarBG);
 
-            var taskbarTempLeft:TextField = CurrentTheme.ui_Text();
+            var taskbarTempLeft:TextField = new TextField();
+            taskbarTempLeft.textColor = 0xFFFFFF;
             taskbarTempLeft.text = "00°";
             taskbarTempLeft.autoSize = TextFieldAutoSize.LEFT;
             taskbarTempLeft.x = 10;
             taskbarTempLeft.y = taskbarBG.y + taskbarBG.height / 2 - taskbarTempLeft.height / 2;
             addChild(taskbarTempLeft);
 
-            var taskbarTempRight:TextField = CurrentTheme.ui_Text();
+            var taskbarTempRight:TextField = new TextField();
+            taskbarTempRight.textColor = 0xFFFFFF;
             taskbarTempRight.text = "00°";
             taskbarTempRight.autoSize = TextFieldAutoSize.RIGHT;
             taskbarTempRight.x = stageWidth - 10 - taskbarTempRight.width;
             taskbarTempRight.y = taskbarBG.y + taskbarBG.height / 2 - taskbarTempRight.height / 2;
             addChild(taskbarTempRight);
 
-            var taskbarClockRight:TextField = CurrentTheme.ui_Text();
+            var taskbarClockRight:TextField = new TextField();
+            taskbarClockRight.textColor = 0xFFFFFF;
             taskbarClockRight.text = "00:00";
             taskbarClockRight.autoSize = TextFieldAutoSize.RIGHT;
             taskbarClockRight.x = stageWidth - 10 - taskbarClockRight.width - taskbarTempRight.width - 10; // Przesunięcie o szerokość temperatury
             taskbarClockRight.y = taskbarBG.y + taskbarBG.height / 2 - taskbarClockRight.height / 2;
             addChild(taskbarClockRight);
 
-            var taskbarCompassLeft:TextField = CurrentTheme.ui_Text();
+            var taskbarCompassLeft:TextField = new TextField();
+            taskbarCompassLeft.textColor = 0xFFFFFF;
             taskbarCompassLeft.text = "N";
             taskbarCompassLeft.autoSize = TextFieldAutoSize.LEFT;
             taskbarCompassLeft.x = taskbarTempLeft.x + taskbarTempLeft.width + 10; // Przesunięcie o szerokość temperatury
@@ -99,6 +106,7 @@ package
             addChild(taskbarCompassLeft);
 
             var taskbarIcons:Array = ["appsIcon", "musicIcon", "climateIcon", "phoneIcon"];
+            var iconObjs:Array = []
             var iconSize:int = 20; // Rozmiar ikon
             var iconPadding:int = 15; // Odstęp między ikonami
             // ikony wyśrodkowane w taskbarze
@@ -146,7 +154,45 @@ package
                     }
                 });
                 addChild(icon);
+                iconObjs.push(icon);
+                icon.alpha = 0
             }
+
+            taskbarTempLeft.alpha = 0;
+            taskbarTempRight.alpha = 0;
+            taskbarClockRight.alpha = 0;
+            taskbarCompassLeft.alpha = 0;
+
+
+            taskbarBG.addEventListener(Event.COMPLETE, function(e:Event):void {
+                Log.log("Taskbar animation complete", pkgName);
+                animateScaleFadeIn(taskbarTempLeft, 0.5);
+
+                var timer1:Timer = new Timer(250, 1);
+                timer1.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:TimerEvent):void {
+                    animateScaleFadeIn(taskbarCompassLeft, 0.5);
+
+                    var timer2:Timer = new Timer(250, 1);
+                    timer2.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:TimerEvent):void {
+                        animateArray(iconObjs, 0.5);
+
+                        var timer3:Timer = new Timer(250, 1);
+                        timer3.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:TimerEvent):void {
+                            animateScaleFadeIn(taskbarClockRight, 0.5);
+
+                            var timer4:Timer = new Timer(250, 1);
+                            timer4.addEventListener(TimerEvent.TIMER_COMPLETE, function(e:TimerEvent):void {
+                                animateScaleFadeIn(taskbarTempRight, 0.5);
+                            });
+                            timer4.start();
+                        });
+                        timer3.start();
+                    });
+                    timer2.start();
+                });
+                timer1.start();
+            });
+            animateTaskbar(taskbarBG, 1);
 
 
             appContainer = new Sprite();
@@ -170,6 +216,78 @@ package
             removeChild(textField);
 
 	    }
+
+        public function animateTaskbar(taskbar:Shape, duration:Number):void {
+            var startY:Number = stageHeight;
+            var endY:Number = stageHeight - taskbar.height;
+            var startAlpha:Number = 1;
+            var endAlpha:Number = 1;
+            var startTime:Number = new Date().time;
+            var endTime:Number = startTime + (duration * 1000);
+            var easeInOutFunction:Function = function(t:Number):Number {
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            };
+
+            taskbar.addEventListener(Event.ENTER_FRAME, function(e:Event):void {
+                var currentTime:Number = new Date().time;
+                var progress:Number = Math.min((currentTime - startTime) / (endTime - startTime), 1);
+
+                progress = easeInOutFunction(progress); // Zastosowanie funkcji ease-in-out
+                taskbar.y = startY + (endY - startY) * progress;
+                taskbar.alpha = startAlpha + (endAlpha - startAlpha) * progress;
+
+                if (progress >= 1) {
+                    taskbar.removeEventListener(Event.ENTER_FRAME, arguments.callee);
+                    taskbar.dispatchEvent(new Event(Event.COMPLETE)); // Wywołanie zdarzenia COMPLETE po zakończeniu animacji
+                }
+            });
+        }
+
+        public function animateScaleFadeIn(element:DisplayObject, duration:Number):void {
+            var startScale:Number = element.scaleX / 2;
+            var endScale:Number = element.scaleX;
+            var startAlpha:Number = 0;
+            var endAlpha:Number = 1;
+            var startTime:Number = new Date().time;
+            var endTime:Number = startTime + (duration * 1000);
+            var easeInOutFunction:Function = function(t:Number):Number {
+            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            };
+
+            // Save the original position
+            var originalX:Number = element.x + element.width / 2;
+            var originalY:Number = element.y + element.height / 2;
+
+            element.scaleX = element.scaleY = startScale;
+            element.alpha = startAlpha;
+
+            element.addEventListener(Event.ENTER_FRAME, function(e:Event):void {
+            var currentTime:Number = new Date().time;
+            var progress:Number = Math.min((currentTime - startTime) / (endTime - startTime), 1);
+
+            progress = easeInOutFunction(progress); // Apply ease-in-out function
+            element.scaleX = element.scaleY = startScale + (endScale - startScale) * progress;
+            element.alpha = startAlpha + (endAlpha - startAlpha) * progress;
+
+            // Adjust position to keep scaling centered
+            element.x = originalX - (element.width / 2);
+            element.y = originalY - (element.height / 2);
+
+            if (progress >= 1) {
+                element.removeEventListener(Event.ENTER_FRAME, arguments.callee);
+            }
+            });
+        }
+
+        public function animateArray(objects:Array, duration:Number):void
+        {
+            for(var i:int = 0; i < objects.length; i++) {
+                var obj:DisplayObject = objects[i];
+                obj.alpha = 0; // Ustawienie początkowej przezroczystości na 0
+                animateScaleFadeIn(obj, duration);
+            }
+        }
+        
 
         public function openAppDrawer():void {
             // Usuń istniejącą zawartość z appContainer
